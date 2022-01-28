@@ -14,8 +14,8 @@ import (
 	"time"
 
 	"github.com/geezyx/sudo-server/internal/actions/wol"
-	"github.com/geezyx/sudo-server/internal/configloader"
 	"github.com/geezyx/sudo-server/internal/core/services/command"
+	"github.com/geezyx/sudo-server/internal/core/services/config"
 	commandhandler "github.com/geezyx/sudo-server/internal/handlers/command"
 	"github.com/go-logr/logr"
 	"github.com/go-logr/stdr"
@@ -77,7 +77,7 @@ func main() {
 
 	apiKey := getAPIKey()
 
-	cfg, err := configloader.Load("config.yaml")
+	cfg, err := config.New().Load("config.yaml")
 	if err != nil {
 		fmt.Println("error loading config.yaml")
 		os.Exit(1)
