@@ -28,9 +28,9 @@ Configuration is defined in [internal/core/domain/domain.go](internal/core/domai
 
 ```yaml
 wol:
-      macAddress: <mac address for WOL>
-      commands:
-        - <list of lowercase commands that will trigger wake on lan action>
+  macAddress: <mac address for WOL>
+  commands:
+    - <list of lowercase commands that will trigger wake on lan action>
 ```
 
 ## Sending Commands
