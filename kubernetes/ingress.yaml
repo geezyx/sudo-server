@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  # NOTE: This is my cert manager confguration, you may have a different TLS setup in your environment
+  # annotations:
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+    # kubernetes.io/tls-acme: "true"
+  labels:
+    app: sudo-server
+    role: server
+  name: sudo-server-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: <my hostname>
+    http:
+      paths:
+      - backend:
+          service:
+            name: sudo-server
+            port:
+              number: 8090
+        path: /sudo
+        pathType: ImplementationSpecific
+# NOTE: This is my cert manager configuration, you may have a different TLS setup
+#  tls:
+#  - hosts:
+#    - <my hostname>
+#    secretName: letsencrypt-certs-sudo-server

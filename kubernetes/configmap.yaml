@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sudo-server
+data:
+  config.yaml: |-
+    wol:
+      macAddress: <mac address for WOL>
+      commands:
+        - wake up pc
+        - wake up my pc
+        - turn on pc
+        - turn on my pc
+        - wake up computer
+        - wake up my computer
+        - turn on computer
+        - turn on my computer

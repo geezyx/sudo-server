@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sudo-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sudo-server
+      role: server
+  template:
+    metadata:
+      labels:
+        app: sudo-server
+        role: server
+    spec:
+      hostNetwork: true
+      containers:
+      - envFrom:
+        - secretRef:
+            name: sudo-server
+        image: geezyx/sudo-server:latest
+        imagePullPolicy: Always
+        name: sudo-server
+        volumeMounts:
+        - name: config-volume
+          mountPath: /root/config.yaml
+          subPath: config.yaml
+        ports:
+        - containerPort: 8090
+          name: web
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 50m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
+      volumes:
+      - name: config-volume
+        configMap:
+          name: sudo-server
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
